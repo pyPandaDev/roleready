@@ -1,0 +1,5 @@
+{
+  "name": "RoleReady",
+  "description": "An intelligent career assistant that analyzes resumes against target roles, providing ATS scores, rewritten bullets, and personalized learning roadmaps using Gemini 2.5 Flash.",
+  "requestFramePermissions": []
+}

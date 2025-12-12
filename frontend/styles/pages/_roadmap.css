@@ -1,0 +1,250 @@
+/* ============================================
+   CAREER ROADMAP - Theme-Aware Styles
+   ============================================ */
+
+/* Experience Slider */
+.exp-slider {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-lg);
+    padding: var(--spacing-sm) 0;
+}
+
+.exp-slider input[type="range"] {
+    flex: 1;
+    height: 6px;
+    -webkit-appearance: none;
+    appearance: none;
+    background: var(--color-border);
+    border-radius: var(--radius-full);
+    outline: none;
+}
+
+.exp-slider input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 24px;
+    height: 24px;
+    background: linear-gradient(135deg, var(--color-primary), #8b5cf6);
+    border: 3px solid var(--color-surface);
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 2px 10px rgba(79, 70, 229, 0.4);
+    transition: all 0.2s ease;
+}
+
+.exp-slider input[type="range"]::-webkit-slider-thumb:hover {
+    transform: scale(1.15);
+    box-shadow: 0 4px 16px rgba(79, 70, 229, 0.5);
+}
+
+.exp-slider input[type="range"]::-moz-range-thumb {
+    width: 24px;
+    height: 24px;
+    background: linear-gradient(135deg, var(--color-primary), #8b5cf6);
+    border: 3px solid var(--color-surface);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.exp-value {
+    min-width: 85px;
+    padding: 0.625rem 1rem;
+    background: var(--color-primary-light);
+    color: var(--color-primary);
+    font-size: 0.875rem;
+    font-weight: 800;
+    text-align: center;
+    border-radius: var(--radius-lg);
+}
+
+/* Roadmap Results */
+.roadmap-results {
+    animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Header Card */
+.roadmap-header-card {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xl);
+    background: var(--color-success-light);
+    border: 1px solid var(--color-success);
+    border-radius: var(--radius-2xl);
+    padding: var(--spacing-2xl);
+    margin-bottom: var(--spacing-xl);
+}
+
+.roadmap-header-card svg {
+    color: var(--color-success);
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+}
+
+.roadmap-header-card h2 {
+    font-size: 1.5rem;
+    font-weight: 800;
+    margin-bottom: var(--spacing-xs);
+    color: var(--color-text-main);
+}
+
+.timeline-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    font-size: 0.9375rem;
+    color: var(--color-text-muted);
+}
+
+/* Phases Container */
+.phases-container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+/* Phase Card */
+.phase-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow-sm);
+}
+
+.phase-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--color-primary);
+}
+
+.phase-card.expanded {
+    border-color: var(--color-primary);
+}
+
+/* Phase Header */
+.phase-header {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    padding: var(--spacing-lg);
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.phase-header:hover {
+    background: var(--color-bg-subtle);
+}
+
+.phase-marker-large {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--color-primary), #8b5cf6);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 1.125rem;
+    flex-shrink: 0;
+    box-shadow: 0 4px 16px -4px rgba(79, 70, 229, 0.4);
+}
+
+.phase-info {
+    flex: 1;
+}
+
+.phase-info h3 {
+    font-size: 1.125rem;
+    font-weight: 700;
+    margin-bottom: var(--spacing-xs);
+    color: var(--color-text-main);
+}
+
+/* Phase Details */
+.phase-details {
+    padding: 0 var(--spacing-lg) var(--spacing-lg);
+    border-top: 1px solid var(--color-border);
+}
+
+/* Milestones Section */
+.milestones-section,
+.skills-section,
+.resources-section {
+    margin-top: var(--spacing-lg);
+}
+
+.milestones-section h4,
+.skills-section h4,
+.resources-section h4 {
+    font-size: 0.8125rem;
+    font-weight: 700;
+    margin-bottom: var(--spacing-sm);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+/* Milestone List */
+.milestone-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.milestone-list li {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-sm) 0;
+    font-size: 0.9375rem;
+    color: var(--color-text-muted);
+    transition: all 0.2s ease;
+}
+
+.milestone-list li:hover {
+    color: var(--color-text-main);
+    transform: translateX(4px);
+}
+
+.milestone-list li svg {
+    flex-shrink: 0;
+    color: var(--color-text-muted);
+}
+
+.milestone-list li.completed {
+    color: var(--color-success);
+}
+
+.milestone-list li.completed svg {
+    color: var(--color-success);
+}
+
+/* Skill Tags */
+.skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+}
+
+.skill-tags .skill-tag {
+    background: var(--color-primary-light);
+    color: var(--color-primary);
+    font-size: 0.8125rem;
+    padding: 0.375rem 0.875rem;
+    border-radius: var(--radius-full);
+    font-weight: 600;
+}
+
+/* Resource List */
+.resource-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}

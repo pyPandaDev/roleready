@@ -1,0 +1,38 @@
+/* ============================================
+   ROLEREADY - MODULAR CSS DESIGN SYSTEM
+   ============================================ */
+
+/* Base - Variables & Reset */
+@import './styles/base/_variables.css';
+@import './styles/base/_reset.css';
+
+/* Utilities */
+@import './styles/utilities/_utilities.css';
+
+/* Components */
+@import './styles/components/_buttons.css';
+@import './styles/components/_cards.css';
+@import './styles/components/_forms.css';
+@import './styles/components/_badges.css';
+
+/* Layout */
+@import './styles/layout/_header.css';
+@import './styles/layout/_layout.css';
+
+/* Pages */
+@import './styles/pages/_landing.css';
+@import './styles/pages/_home.css';
+@import './styles/pages/_auth.css';
+@import './styles/pages/_dashboard.css';
+@import './styles/pages/_career-coach.css';
+@import './styles/pages/_tools.css';
+@import './styles/pages/_resume-analyzer.css';
+@import './styles/pages/_jd-analysis.css';
+@import './styles/pages/_interview-prep.css';
+
+/* TAILWIND DIRECTIVES
+   Must be after imports or processed correctly by PostCSS
+*/
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

@@ -1,0 +1,378 @@
+/* ============================================
+   SKILL GAP ANALYZER - Theme-Aware Styles
+   ============================================ */
+
+/* Results Container */
+.skillgap-results {
+    animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Match Score Card */
+.match-score-card {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xl);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-2xl);
+    padding: var(--spacing-2xl);
+    margin-bottom: var(--spacing-xl);
+    box-shadow: var(--shadow-lg);
+}
+
+@media (max-width: 600px) {
+    .match-score-card {
+        flex-direction: column;
+        text-align: center;
+        padding: var(--spacing-xl);
+    }
+}
+
+/* Score Circle */
+.score-circle {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    position: relative;
+    background: conic-gradient(var(--color-primary) var(--score-percent, 0%),
+            var(--color-border) var(--score-percent, 0%));
+}
+
+.score-circle::before {
+    content: '';
+    position: absolute;
+    inset: 10px;
+    border-radius: 50%;
+    background: var(--color-surface);
+}
+
+.score-inner {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.score-value {
+    font-size: 2.5rem;
+    font-weight: 900;
+    background: linear-gradient(135deg, var(--color-primary), #8b5cf6);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    line-height: 1;
+}
+
+.score-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-text-muted);
+    margin-top: var(--spacing-xs);
+}
+
+.score-meta h3 {
+    font-size: 1.5rem;
+    font-weight: 800;
+    margin-bottom: var(--spacing-xs);
+    color: var(--color-text-main);
+}
+
+.score-meta p {
+    color: var(--color-text-muted);
+    font-size: 1rem;
+}
+
+/* Skills Grid */
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
+}
+
+@media (max-width: 640px) {
+    .skills-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.skills-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    padding: var(--spacing-xl);
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow-sm);
+}
+
+.skills-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lg);
+}
+
+.skills-card h3 {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: var(--spacing-md);
+}
+
+.skills-card.have {
+    border-left: 4px solid var(--color-success);
+}
+
+.skills-card.have h3 {
+    color: var(--color-success);
+}
+
+.skills-card.need {
+    border-left: 4px solid var(--color-warning);
+}
+
+.skills-card.need h3 {
+    color: var(--color-warning);
+}
+
+/* Skills List */
+.skills-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+.skill-tag {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: 0.625rem 0.875rem;
+    border-radius: var(--radius-lg);
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.skill-tag:hover {
+    transform: translateX(4px);
+}
+
+.skill-tag.have {
+    background: var(--color-success-light);
+    color: var(--color-success);
+}
+
+.skill-tag.need {
+    background: var(--color-warning-light);
+    color: var(--color-warning);
+}
+
+.skill-level,
+.skill-priority {
+    margin-left: auto;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+.skill-time {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    margin-left: auto;
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+}
+
+/* Action Plan Card */
+.action-plan-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    padding: var(--spacing-xl);
+    margin-bottom: var(--spacing-lg);
+    box-shadow: var(--shadow-sm);
+    transition: all 0.3s ease;
+}
+
+.action-plan-card:hover {
+    box-shadow: var(--shadow-md);
+}
+
+.action-plan-card h3 {
+    font-size: 1.125rem;
+    font-weight: 700;
+    margin-bottom: var(--spacing-lg);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    color: var(--color-text-main);
+}
+
+/* Timeline */
+.phases-timeline {
+    position: relative;
+    padding-left: 2.5rem;
+}
+
+.phases-timeline::before {
+    content: '';
+    position: absolute;
+    left: 0.75rem;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: linear-gradient(180deg,
+            var(--color-primary),
+            #8b5cf6,
+            #ec4899);
+    border-radius: var(--radius-full);
+}
+
+.phase-item {
+    position: relative;
+    padding-bottom: var(--spacing-xl);
+}
+
+.phase-item:last-child {
+    padding-bottom: 0;
+}
+
+.phase-marker {
+    position: absolute;
+    left: -1.75rem;
+    top: 0;
+    width: 24px;
+    height: 24px;
+    background: linear-gradient(135deg, var(--color-primary), #8b5cf6);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 0 4px var(--color-bg);
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+.phase-content h4 {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: var(--spacing-xs);
+    color: var(--color-text-main);
+}
+
+.phase-duration {
+    font-size: 0.8125rem;
+    color: var(--color-primary);
+    font-weight: 600;
+    display: inline-block;
+    margin-bottom: var(--spacing-sm);
+    padding: 0.25rem 0.75rem;
+    background: var(--color-primary-light);
+    border-radius: var(--radius-full);
+}
+
+.phase-content ul {
+    margin: 0;
+    padding-left: 1.25rem;
+    list-style: none;
+}
+
+.phase-content li {
+    position: relative;
+    font-size: 0.9375rem;
+    color: var(--color-text-muted);
+    margin-bottom: var(--spacing-xs);
+    line-height: 1.6;
+    padding-left: 1rem;
+}
+
+.phase-content li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--color-primary);
+}
+
+/* Resources Card */
+.resources-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    padding: var(--spacing-xl);
+    margin-bottom: var(--spacing-lg);
+    box-shadow: var(--shadow-sm);
+}
+
+.resources-card h3 {
+    font-size: 1.125rem;
+    font-weight: 700;
+    margin-bottom: var(--spacing-lg);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    color: var(--color-text-main);
+}
+
+.resources-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: var(--spacing-md);
+}
+
+.resource-item {
+    padding: var(--spacing-md);
+    background: var(--color-bg-subtle);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    transition: all 0.25s ease;
+}
+
+.resource-item:hover {
+    background: var(--color-surface);
+    border-color: var(--color-primary);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.resource-type {
+    display: inline-block;
+    font-size: 0.625rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: var(--color-primary);
+    background: var(--color-primary-light);
+    padding: 0.25rem 0.5rem;
+    border-radius: var(--radius-sm);
+    margin-bottom: var(--spacing-sm);
+}
+
+.resource-item p {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-text-main);
+    margin: 0;
+}
+
+.resource-item a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    margin-top: var(--spacing-sm);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    transition: gap 0.2s ease;
+}
+
+.resource-item a:hover {
+    gap: 0.5rem;
+}

@@ -1,0 +1,16 @@
+/* ============================================
+   TOOL PAGES - CSS Module Router
+   ============================================
+   
+   This file imports all tool-specific CSS modules.
+   Each tool has its own dedicated CSS file for maintainability.
+   ============================================ */
+
+/* Shared base styles for all tool pages */
+@import './_tools-base.css';
+
+/* Individual tool page styles */
+@import './_skillgap.css';
+@import './_portfolio.css';
+@import './_roadmap.css';
+@import './_resume-analyzer.css';

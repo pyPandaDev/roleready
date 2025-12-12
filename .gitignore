@@ -1,0 +1,39 @@
+# Dependencies
+node_modules/
+.pnp.*
+.yarn/*
+
+# Build outputs
+dist/
+build/
+.vite/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+
+# Python (backend)
+__pycache__/
+*.py[cod]
+venv/
+.venv/
+
+# Firebase credentials (NEVER commit these!)
+firebase-service-account.json
+*-service-account.json
+*.json.bak
