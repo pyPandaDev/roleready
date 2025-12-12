@@ -94,6 +94,21 @@ const LoginPage: React.FC<PageProps> = ({ setView }) => {
                     Don't have an account? <button onClick={() => setView('signup')}>Sign up</button>
                 </p>
             </div>
+
+            {/* Demo Credentials Box */}
+            <div className="demo-credentials-box">
+                <div className="demo-credentials-title">🔐 For Login</div>
+                <div className="demo-credentials-content">
+                    <div className="demo-field">
+                        <span className="demo-label">Email:</span>
+                        <span className="demo-value">mayank@gmail.com</span>
+                    </div>
+                    <div className="demo-field">
+                        <span className="demo-label">Password:</span>
+                        <span className="demo-value">test1234</span>
+                    </div>
+                </div>
+            </div>
         </div>
     );
 };

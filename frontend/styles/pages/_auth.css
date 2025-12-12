@@ -357,3 +357,76 @@
 .auth-switch button:hover {
     text-decoration: underline;
 }
+
+/* Demo Credentials Box */
+.demo-credentials-box {
+    position: fixed;
+    right: 2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    border: 1px solid rgba(99, 102, 241, 0.3);
+    border-radius: 12px;
+    padding: 1.5rem;
+    min-width: 220px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    z-index: 100;
+}
+
+.demo-credentials-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #f8fafc;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.demo-credentials-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.demo-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.demo-label {
+    font-size: 0.75rem;
+    color: #94a3b8;
+    font-weight: 500;
+}
+
+.demo-value {
+    font-size: 0.875rem;
+    color: #a5b4fc;
+    font-weight: 600;
+    background: rgba(99, 102, 241, 0.15);
+    padding: 0.5rem 0.75rem;
+    border-radius: 6px;
+    font-family: monospace;
+    word-break: break-all;
+}
+
+@media (max-width: 1200px) {
+    .demo-credentials-box {
+        position: fixed;
+        right: 1rem;
+        top: auto;
+        bottom: 1rem;
+        transform: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .demo-credentials-box {
+        position: relative;
+        right: auto;
+        bottom: auto;
+        margin-top: 1.5rem;
+        width: 100%;
+        max-width: 340px;
+    }
+}
