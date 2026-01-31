@@ -11,6 +11,43 @@ from services.ai_common import get_model, clean_json_response
 logger = logging.getLogger(__name__)
 
 
+async def get_salary_insights(role: str, location: str) -> Dict[str, Any]:
+    """Get market salary insights."""
+    model = get_model()
+
+    prompt = f"""You are an expert compensation analyst. Provide detailed salary insights.
+
+ROLE: {role}
+LOCATION: {location}
+
+Provide REALISTIC, market-based salary data for this role in this location.
+If specific data isn't available, make an educated estimate based on similar roles/regions.
+
+Return JSON format:
+{{
+    "role": "{role}",
+    "location": "{location}",
+    "currency": "<currency symbol>",
+    "ranges": {{
+        "entry_level": {{ "min": <number>, "max": <number>, "avg": <number> }},
+        "mid_level": {{ "min": <number>, "max": <number>, "avg": <number> }},
+        "senior_level": {{ "min": <number>, "max": <number>, "avg": <number> }}
+    }},
+    "factors": ["<factor1>", "<factor2>"],
+    "market_demand": "High|Medium|Low",
+    "top_companies": ["<company1>", "<company2>"],
+    "negotiation_tips": ["<tip1>", "<tip2>"]
+}}"""
+
+    try:
+        response = model.generate_content(prompt)
+        result_text = clean_json_response(response.text.strip())
+        return json.loads(result_text)
+    except Exception as e:
+        logger.error(f"Salary insights generation failed: {str(e)}")
+        raise Exception(f"Salary insights generation failed: {str(e)}")
+
+
 async def career_coach_chat(message: str, conversation_history: List[Dict[str, str]]) -> str:
     """AI Career Coach chat - CAREER-FOCUSED ONLY with concise, actionable responses."""
     from services.search_service import get_career_search_context

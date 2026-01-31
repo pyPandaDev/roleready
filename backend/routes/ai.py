@@ -71,6 +71,38 @@ class EvaluateInterviewRequest(BaseModel):
     questionsWithAnswers: List[Dict[str, str]]  # [{question, userAnswer, difficulty}]
 
 
+class SalaryInsightsRequest(BaseModel):
+    role: str
+    location: str
+
+
+class ColdEmailRequest(BaseModel):
+    companyName: str
+    jobRole: str
+    resumeText: Optional[str] = None
+    recipientName: Optional[str] = None
+
+
+class CoverLetterRequest(BaseModel):
+    companyName: str
+    jobDescription: str
+    resumeText: Optional[str] = None
+    jobRole: Optional[str] = None
+
+
+class MockInterviewQuestionRequest(BaseModel):
+    role: str
+    resumeText: Optional[str] = None
+    conversationHistory: List[Dict[str, str]] = []
+    currentPhase: str = "intro"
+
+
+class MockInterviewEvaluateRequest(BaseModel):
+    role: str
+    resumeText: Optional[str] = None
+    conversationHistory: List[Dict[str, str]] = []
+
+
 # ============= HELPER FUNCTION =============
 
 def handle_ai_error(e: Exception, operation: str):
@@ -301,3 +333,110 @@ async def evaluate_interview_answers(
         raise
     except Exception as e:
         handle_ai_error(e, "evaluating interview answers")
+
+
+@router.post("/salary-insights")
+@limiter.limit("10/minute")
+async def get_salary_insights(
+    request: Request,
+    data: SalaryInsightsRequest,
+    current_user: dict = Depends(get_current_user)
+):
+    """Get market salary insights - Requires authentication"""
+    try:
+        result = await gemini_service.get_salary_insights(
+            role=data.role,
+            location=data.location
+        )
+        return result
+    except HTTPException:
+        raise
+    except Exception as e:
+        handle_ai_error(e, "getting salary insights")
+
+
+@router.post("/cold-email")
+@limiter.limit("10/minute")
+async def generate_cold_email(
+    request: Request,
+    data: ColdEmailRequest,
+    current_user: dict = Depends(get_current_user)
+):
+    """Generate a cold outreach email - Requires authentication"""
+    try:
+        result = await gemini_service.generate_cold_email(
+            company_name=data.companyName,
+            job_role=data.jobRole,
+            resume_text=data.resumeText,
+            recipient_name=data.recipientName
+        )
+        return result
+    except HTTPException:
+        raise
+    except Exception as e:
+        handle_ai_error(e, "generating cold email")
+
+
+@router.post("/cover-letter")
+@limiter.limit("10/minute")
+async def generate_cover_letter(
+    request: Request,
+    data: CoverLetterRequest,
+    current_user: dict = Depends(get_current_user)
+):
+    """Generate a cover letter - Requires authentication"""
+    try:
+        result = await gemini_service.generate_cover_letter(
+            company_name=data.companyName,
+            job_description=data.jobDescription,
+            resume_text=data.resumeText,
+            job_role=data.jobRole
+        )
+        return result
+    except HTTPException:
+        raise
+    except Exception as e:
+        handle_ai_error(e, "generating cover letter")
+
+
+@router.post("/mock-interview/question")
+@limiter.limit("20/minute")
+async def mock_interview_question(
+    request: Request,
+    data: MockInterviewQuestionRequest,
+    current_user: dict = Depends(get_current_user)
+):
+    """Generate the next mock interview question - Requires authentication"""
+    try:
+        result = await gemini_service.generate_mock_interview_question(
+            role=data.role,
+            resume_text=data.resumeText,
+            conversation_history=data.conversationHistory,
+            current_phase=data.currentPhase
+        )
+        return result
+    except HTTPException:
+        raise
+    except Exception as e:
+        handle_ai_error(e, "generating mock interview question")
+
+
+@router.post("/mock-interview/evaluate")
+@limiter.limit("20/minute")
+async def mock_interview_evaluate(
+    request: Request,
+    data: MockInterviewEvaluateRequest,
+    current_user: dict = Depends(get_current_user)
+):
+    """Evaluate the latest answer in mock interview - Requires authentication"""
+    try:
+        result = await gemini_service.evaluate_mock_interview_answer(
+            role=data.role,
+            resume_text=data.resumeText,
+            conversation_history=data.conversationHistory
+        )
+        return result
+    except HTTPException:
+        raise
+    except Exception as e:
+        handle_ai_error(e, "evaluating mock interview answer")

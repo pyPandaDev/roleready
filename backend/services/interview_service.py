@@ -5,7 +5,7 @@ Handles interview question generation and answer evaluation
 
 import json
 import logging
-from typing import Dict, List, Any
+from typing import Dict, List, Any, Optional
 from services.ai_common import get_model, clean_json_response
 
 logger = logging.getLogger(__name__)
@@ -308,3 +308,95 @@ Questions and Answers:
     except Exception as e:
         logger.error(f"Interview evaluation failed: {str(e)}")
         raise Exception(f"Failed to evaluate answers: {str(e)}")
+
+
+async def generate_mock_interview_question(
+    role: str,
+    resume_text: str = "",
+    conversation_history: Optional[List[Dict[str, str]]] = None,
+    current_phase: str = "intro"
+) -> Dict[str, Any]:
+    """Generate the next interview question in a mock interview session."""
+    model = get_model()
+
+    if conversation_history is None:
+        conversation_history = []
+
+    # Construct conversation history string
+    history_str = ""
+    for msg in conversation_history:
+        history_str += f"{msg.get('role', 'user')}: {msg.get('content', '')}\n"
+
+    prompt = f"""You are an experienced Technical Recruiter conducting a mock interview.
+
+ROLE: {role}
+PHASE: {current_phase} (intro -> experience -> technical -> behavioral -> wrap-up)
+
+CANDIDATE'S RESUME:
+{resume_text or "[No resume provided]"}
+
+CONVERSATION HISTORY:
+{history_str}
+
+YOUR TASK:
+Generate the NEXT question for the candidate.
+1. If in 'intro' phase: Ask about their background or a highlight from their resume.
+2. If in 'experience' phase: Dig into a specific project or role.
+3. If in 'technical' phase: Ask a relevant technical question for {role}.
+4. If in 'behavioral' phase: Ask a STAR method question.
+5. If in 'wrap-up' phase: Ask if they have questions for you.
+
+Return JSON format:
+{{
+    "question": "The question text...",
+    "phase": "{current_phase}",
+    "difficulty": "easy|medium|hard",
+    "topic": "topic of the question"
+}}"""
+
+    try:
+        response = model.generate_content(prompt)
+        result_text = clean_json_response(response.text.strip())
+        return json.loads(result_text)
+    except Exception as e:
+        logger.error(f"Mock interview question generation failed: {str(e)}")
+        raise Exception(f"Mock interview question generation failed: {str(e)}")
+
+
+async def evaluate_mock_interview_answer(
+    role: str,
+    conversation_history: List[Dict[str, str]],
+    resume_text: str = ""
+) -> Dict[str, Any]:
+    """Evaluate the latest answer in a mock interview."""
+    model = get_model()
+
+    # Get the last question and answer
+    if len(conversation_history) < 2:
+        return {"feedback": "Not enough history to evaluate.", "score": 0}
+
+    last_answer = conversation_history[-1].get('content', '')
+    last_question = conversation_history[-2].get('content', '')
+
+    prompt = f"""You are an Interview Coach. Evaluate this answer.
+
+ROLE: {role}
+QUESTION: {last_question}
+ANSWER: {last_answer}
+
+Provide constructive feedback.
+
+Return JSON format:
+{{
+    "score": <0-10>,
+    "feedback": "Constructive feedback...",
+    "better_answer": "Example of a stronger answer..."
+}}"""
+
+    try:
+        response = model.generate_content(prompt)
+        result_text = clean_json_response(response.text.strip())
+        return json.loads(result_text)
+    except Exception as e:
+        logger.error(f"Mock interview evaluation failed: {str(e)}")
+        raise Exception(f"Mock interview evaluation failed: {str(e)}")

@@ -9,6 +9,7 @@ for backward compatibility. The actual implementations are in:
 - interview_service.py: Interview questions and evaluation
 - career_service.py: Career coach and roadmap
 - portfolio_service.py: Portfolio generation and skill gap analysis
+- writing_service.py: Cover letter and cold email generation
 """
 
 # Re-export common utilities
@@ -33,19 +34,28 @@ from services.interview_service import (
     evaluate_interview_answers,
     get_role_categories,
     generate_fallback_questions,
+    generate_mock_interview_question,
+    evaluate_mock_interview_answer,
     ROLE_CATEGORIES
 )
 
 # Re-export career functions
 from services.career_service import (
     career_coach_chat,
-    generate_career_roadmap
+    generate_career_roadmap,
+    get_salary_insights
 )
 
 # Re-export portfolio functions
 from services.portfolio_service import (
     generate_portfolio,
     analyze_skill_gap
+)
+
+# Re-export writing functions
+from services.writing_service import (
+    generate_cover_letter,
+    generate_cold_email
 )
 
 # All public symbols for backward compatibility
@@ -65,11 +75,17 @@ __all__ = [
     "evaluate_interview_answers",
     "get_role_categories",
     "generate_fallback_questions",
+    "generate_mock_interview_question",
+    "evaluate_mock_interview_answer",
     "ROLE_CATEGORIES",
     # Career
     "career_coach_chat",
     "generate_career_roadmap",
+    "get_salary_insights",
     # Portfolio
     "generate_portfolio",
     "analyze_skill_gap",
+    # Writing
+    "generate_cover_letter",
+    "generate_cold_email"
 ]
